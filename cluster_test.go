@@ -829,9 +829,9 @@ var _ = Describe("RedisMock", func() {
 
 		It("SetArgs", func() {
 			operationStatusCmd(clusterMock, func() *ExpectedStatus {
-				return clusterMock.ExpectSetArgs("key", "value", redis.SetArgs{TTL: 1 * time.Minute})
+				return clusterMock.ExpectSetArgs("key", "value", redis.SetArgs{TTL: 1 * time.Minute, Get: true})
 			}, func() *redis.StatusCmd {
-				return client.SetArgs(ctx, "key", "value", redis.SetArgs{TTL: 1 * time.Minute})
+				return client.SetArgs(ctx, "key", "value", redis.SetArgs{TTL: 1 * time.Minute, Get: true})
 			})
 		})
 
