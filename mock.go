@@ -751,6 +751,13 @@ func (m *mock) ExpectSetRange(key string, offset int64, value string) *ExpectedI
 	return e
 }
 
+func (m *mock) ExpectSetArgs(key string, value string, args redis.SetArgs) *ExpectedStatus {
+	e := &ExpectedStatus{}
+	e.cmd = m.factory.SetArgs(m.ctx, key, value, args)
+	m.pushExpect(e)
+	return e
+}
+
 func (m *mock) ExpectStrLen(key string) *ExpectedInt {
 	e := &ExpectedInt{}
 	e.cmd = m.factory.StrLen(m.ctx, key)

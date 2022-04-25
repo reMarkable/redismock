@@ -828,6 +828,14 @@ var _ = Describe("RedisMock", func() {
 			})
 		})
 
+		It("SetArgs", func() {
+			operationStatusCmd(clientMock, func() *ExpectedStatus {
+				return clientMock.ExpectSetArgs("key", "value", redis.SetArgs{TTL: 1 * time.Minute})
+			}, func() *redis.StatusCmd {
+				return client.SetArgs(ctx, "key", "value", redis.SetArgs{TTL: 1 * time.Minute})
+			})
+		})
+
 		It("StrLen", func() {
 			operationIntCmd(clientMock, func() *ExpectedInt {
 				return clientMock.ExpectStrLen("key")
